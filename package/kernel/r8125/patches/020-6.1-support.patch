@@ -1,0 +1,38 @@
+--- a/src/r8125.h
++++ b/src/r8125.h
+@@ -449,7 +449,9 @@ This is free software, and you are welco
+ #define R8125_ERI_REGS_SIZE  	(0x100)
+ #define R8125_REGS_DUMP_SIZE     (0x400)
+ #define R8125_PCI_REGS_SIZE  	(0x100)
++#if LINUX_VERSION_CODE < KERNEL_VERSION(6,1,0)
+ #define R8125_NAPI_WEIGHT   64
++#endif
+ 
+ #define R8125_MAX_MSIX_VEC_8125B   32
+ #define R8125_MIN_MSIX_VEC_8125B   17
+@@ -628,7 +630,11 @@ typedef int *napi_budget;
+ typedef struct napi_struct *napi_ptr;
+ typedef int napi_budget;
+ 
++#if LINUX_VERSION_CODE < KERNEL_VERSION(6,1,0)
+ #define RTL_NAPI_CONFIG(ndev, priv, function, weight)   netif_napi_add(ndev, &priv->napi, function, weight)
++#else
++#define RTL_NAPI_CONFIG(ndev, priv, function)   netif_napi_add(ndev, &priv->napi, function)
++#endif
+ #define RTL_NAPI_QUOTA(budget, ndev)            min(budget, budget)
+ #define RTL_GET_PRIV(stuct_ptr, priv_struct)        container_of(stuct_ptr, priv_struct, stuct_ptr)
+ #define RTL_GET_NETDEV(priv_ptr)            struct net_device *dev = priv_ptr->dev;
+--- a/src/r8125_n.c
++++ b/src/r8125_n.c
+@@ -12602,7 +12602,11 @@ static void rtl8125_init_napi(struct rtl
+                         poll = rtl8125_poll;
+                 }
+ 
++       #if LINUX_VERSION_CODE < KERNEL_VERSION(6,1,0)
+                 RTL_NAPI_CONFIG(tp->dev, r8125napi, poll, R8125_NAPI_WEIGHT);
++       #else
++               RTL_NAPI_CONFIG(tp->dev, r8125napi, poll);
++       #endif
+ #endif
+ 
+                 r8125napi->priv = tp;
