@@ -58,7 +58,7 @@
 		reg = <0>;
 		reset-assert-us = <10000>;
 		reset-deassert-us = <50000>;
-		reset-gpios = <&gpio1 RK_PB1 GPIO_ACTIVE_LOW>;
+		reset-gpios = <&gpio1 RK_PB0 GPIO_ACTIVE_LOW>;
 	};
 };
 
