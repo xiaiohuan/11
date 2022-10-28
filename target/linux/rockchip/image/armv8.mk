@@ -2,17 +2,6 @@
 #
 # Copyright (C) 2020 Tobias Maedel
 
-define Device/fastrhino-r66s
-  DEVICE_VENDOR := FastRhino
-  DEVICE_MODEL := R66S
-  SOC := rk3568
-  UBOOT_DEVICE_NAME := fastrhino-r66s-rk3568
-  IMAGE/sysupgrade.img.gz := boot-common | boot-script | pine64-img | gzip | append-metadata
-  DEVICE_PACKAGES := kmod-r8125 -urngd
-  SUPPORTED_DEVICES := fastrhino,r66s
-endef
-TARGET_DEVICES += fastrhino-r66s
-
 define Device/friendlyarm_nanopi-r2c
   DEVICE_VENDOR := FriendlyARM
   DEVICE_MODEL := NanoPi R2C
@@ -45,6 +34,26 @@ define Device/friendlyarm_nanopi-r4s-enterprise
   DEVICE_MODEL := NanoPi R4S Enterprise Edition
 endef
 TARGET_DEVICES += friendlyarm_nanopi-r4s-enterprise
+
+define Device/lunzn_fastrhino-r66s
+  DEVICE_VENDOR := Lunzn
+  DEVICE_MODEL := FastRhino R66S
+  SOC := rk3568
+  UBOOT_DEVICE_NAME := fastrhino-r66s-rk3568
+  IMAGE/sysupgrade.img.gz := boot-common | boot-script | pine64-img | gzip | append-metadata
+  DEVICE_PACKAGES := kmod-r8125 -urngd
+endef
+TARGET_DEVICES += lunzn_fastrhino-r66s
+
+define Device/lunzn_fastrhino-r68s
+  DEVICE_VENDOR := Lunzn
+  DEVICE_MODEL := FastRhino R68S
+  SOC := rk3568
+  UBOOT_DEVICE_NAME := fastrhino-r68s-rk3568
+  IMAGE/sysupgrade.img.gz := boot-common | boot-script | pine64-img | gzip | append-metadata
+  DEVICE_PACKAGES := kmod-r8125 -urngd
+endef
+TARGET_DEVICES += lunzn_fastrhino-r66s
 
 define Device/pine64_rockpro64
   DEVICE_VENDOR := Pine64
