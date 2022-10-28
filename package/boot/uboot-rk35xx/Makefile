@@ -27,17 +27,29 @@ endef
 
 define U-Boot/fastrhino-r66s-rk3568
   BUILD_SUBTARGET:=armv8
-  NAME:=FastRhino R66S
+  NAME:=Lunzn FastRhino R66S
   BUILD_DEVICES:= \
-    fastrhino-r66s
+    lunzn_fastrhino-r66s
   DEPENDS:=+PACKAGE_u-boot-fastrhino-r66s-rk3568:arm-trusted-firmware-rk3568
   PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip-vendor
   ATF:=rk3568_bl31_v1.34.elf
   DDR:=rk3568_ddr_1560MHz_v1.13.bin
 endef
 
+define U-Boot/fastrhino-r68s-rk3568
+  BUILD_SUBTARGET:=armv8
+  NAME:=Lunzn FastRhino R68S
+  BUILD_DEVICES:= \
+    lunzn_fastrhino-r68s
+  DEPENDS:=+PACKAGE_u-boot-fastrhino-r68s-rk3568:arm-trusted-firmware-rk3568
+  PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip-vendor
+  ATF:=rk3568_bl31_v1.34.elf
+  DDR:=rk3568_ddr_1560MHz_v1.13.bin
+endef
+
 UBOOT_TARGETS := \
-  fastrhino-r66s-rk3568
+  fastrhino-r66s-rk3568 \
+  fastrhino-r68s-rk3568
 
 UBOOT_CONFIGURE_VARS += USE_PRIVATE_LIBGCC=yes
 
