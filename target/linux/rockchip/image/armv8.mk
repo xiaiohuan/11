@@ -53,7 +53,7 @@ define Device/lunzn_fastrhino-r68s
   IMAGE/sysupgrade.img.gz := boot-common | boot-script | pine64-img | gzip | append-metadata
   DEVICE_PACKAGES := kmod-r8125 -urngd
 endef
-TARGET_DEVICES += lunzn_fastrhino-r66s
+TARGET_DEVICES += lunzn_fastrhino-r68s
 
 define Device/pine64_rockpro64
   DEVICE_VENDOR := Pine64
