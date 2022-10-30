@@ -44,6 +44,7 @@ define U-Boot/fastrhino-r68s-rk3568
   DEPENDS:=+PACKAGE_u-boot-fastrhino-r68s-rk3568:arm-trusted-firmware-rk3568
   PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip-vendor
   ATF:=rk3568_bl31_v1.34.elf
+  TEE:=rk3588_bl32_v1.10.bin
   DDR:=rk3568_ddr_1560MHz_v1.13.bin
 endef
 
@@ -54,7 +55,7 @@ UBOOT_TARGETS := \
 UBOOT_CONFIGURE_VARS += USE_PRIVATE_LIBGCC=yes
 
 UBOOT_MAKE_FLAGS += \
-  BL31=$(STAGING_DIR_IMAGE)/$(ATF) spl/u-boot-spl.bin u-boot.dtb u-boot.itb
+  BL31=$(STAGING_DIR_IMAGE)/$(ATF) $(if $(TEE), BL32=$(STAGING_DIR_IMAGE)/$(TEE)) spl/u-boot-spl.bin u-boot.dtb u-boot.itb
 
 define Build/Configure
 	$(call Build/Configure/U-Boot)
