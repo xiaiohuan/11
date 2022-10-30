@@ -25,6 +25,8 @@ define U-Boot/Default
   HIDDEN:=1
 endef
 
+# RK3568 boards
+
 define U-Boot/fastrhino-r66s-rk3568
   BUILD_SUBTARGET:=armv8
   NAME:=Lunzn FastRhino R66S
@@ -55,7 +57,7 @@ UBOOT_TARGETS := \
 UBOOT_CONFIGURE_VARS += USE_PRIVATE_LIBGCC=yes
 
 UBOOT_MAKE_FLAGS += \
-  BL31=$(STAGING_DIR_IMAGE)/$(ATF) $(if $(TEE), BL32=$(STAGING_DIR_IMAGE)/$(TEE)) spl/u-boot-spl.bin u-boot.dtb u-boot.itb
+  BL31=$(STAGING_DIR_IMAGE)/$(ATF) $(if $(TEE),BL32=$(STAGING_DIR_IMAGE)/$(TEE)) spl/u-boot-spl.bin u-boot.dtb u-boot.itb
 
 define Build/Configure
 	$(call Build/Configure/U-Boot)
@@ -65,7 +67,7 @@ endef
 
 define Build/InstallDev
 	$(INSTALL_DIR) $(STAGING_DIR_IMAGE)
-	$(PKG_BUILD_DIR)/tools/mkimage -n rk3568 -T rksd \
+	$(PKG_BUILD_DIR)/tools/mkimage -n $(word 1,$(subst _, ,$(DDR))) -T rksd \
 		-d $(STAGING_DIR_IMAGE)/$(DDR):$(PKG_BUILD_DIR)/spl/u-boot-spl.bin $(PKG_BUILD_DIR)/idbloader.img
 	$(CP) $(PKG_BUILD_DIR)/idbloader.img $(STAGING_DIR_IMAGE)/$(BUILD_VARIANT)-idbloader.img
 	$(CP) $(PKG_BUILD_DIR)/u-boot.itb $(STAGING_DIR_IMAGE)/$(BUILD_VARIANT)-u-boot.itb
