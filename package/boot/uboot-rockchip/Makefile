@@ -113,7 +113,7 @@ define U-Boot/fastrhino-r66s-rk3568
     lunzn_fastrhino-r66s
   DEPENDS:=+PACKAGE_u-boot-fastrhino-r66s-rk3568:arm-trusted-firmware-rk3568
   PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip-vendor
-  ATF:=rk3568_bl31_v1.34.elf
+  ATF:=rk3568_bl31_v1.28.elf
   DDR:=rk3568_ddr_1560MHz_v1.13.bin
 endef
 
@@ -124,7 +124,7 @@ define U-Boot/fastrhino-r68s-rk3568
     lunzn_fastrhino-r68s
   DEPENDS:=+PACKAGE_u-boot-fastrhino-r68s-rk3568:arm-trusted-firmware-rk3568
   PKG_BUILD_DEPENDS:=arm-trusted-firmware-rockchip-vendor
-  ATF:=rk3568_bl31_v1.34.elf
+  ATF:=rk3568_bl31_v1.28.elf
   DDR:=rk3568_ddr_1560MHz_v1.13.bin
 endef
 
@@ -147,6 +147,11 @@ define Build/Configure
 	$(call Build/Configure/U-Boot)
 
 	$(SED) 's#CONFIG_MKIMAGE_DTC_PATH=.*#CONFIG_MKIMAGE_DTC_PATH="$(PKG_BUILD_DIR)/scripts/dtc/dtc"#g' $(PKG_BUILD_DIR)/.config
+
+ifneq ($(DDR),)
+	$(INSTALL_DIR) $(PKG_BUILD_DIR)/tpl
+	$(CP) $(STAGING_DIR_IMAGE)/$(DDR) $(PKG_BUILD_DIR)/tpl/u-boot-tpl.bin
+endif
 endef
 
 define Build/InstallDev
@@ -155,10 +160,6 @@ ifneq ($(USE_RKBIN),)
 	$(STAGING_DIR_IMAGE)/loaderimage --pack --uboot $(PKG_BUILD_DIR)/u-boot-dtb.bin $(PKG_BUILD_DIR)/uboot.img 0x200000
 	$(CP) $(PKG_BUILD_DIR)/uboot.img $(STAGING_DIR_IMAGE)/$(BUILD_VARIANT)-uboot.img
 else
-ifneq ($(DDR),)
-	$(PKG_BUILD_DIR)/tools/mkimage -n $(word 1,$(subst _, ,$(DDR))) -T rksd \
-		-d $(STAGING_DIR_IMAGE)/$(DDR):$(PKG_BUILD_DIR)/spl/u-boot-spl.bin $(PKG_BUILD_DIR)/idbloader.img
-endif
 	$(CP) $(PKG_BUILD_DIR)/idbloader.img $(STAGING_DIR_IMAGE)/$(BUILD_VARIANT)-idbloader.img
 	$(CP) $(PKG_BUILD_DIR)/u-boot.itb $(STAGING_DIR_IMAGE)/$(BUILD_VARIANT)-u-boot.itb
 endif
