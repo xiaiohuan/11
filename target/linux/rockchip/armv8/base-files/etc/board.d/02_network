@@ -20,6 +20,7 @@ rockchip_setup_interfaces()
 		;;
 	lunzn,fastrhino-r68s)
 		ucidef_set_interfaces_lan_wan 'eth0 eth1 eth2' 'eth3'
+		;;
 	*)
 		ucidef_set_interface_lan 'eth0'
 		;;
