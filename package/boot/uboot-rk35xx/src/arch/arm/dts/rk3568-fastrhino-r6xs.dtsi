@@ -20,22 +20,26 @@
 	};
 
 	leds {
+		u-boot,dm-spl;
 		compatible = "gpio-leds";
 		pinctrl-names = "default";
 		pinctrl-0 = <&status_led_pin>;
 
 		status_led: led-status {
+			u-boot,dm-spl;
 			label = "blue:status";
 			gpios = <&gpio0 RK_PC0 GPIO_ACTIVE_HIGH>;
 		};
 	};
 
 	gpio-keys {
+		u-boot,dm-spl;
 		compatible = "gpio-keys";
 		pinctrl-names = "default";
 		pinctrl-0 = <&reset_button_pin>;
 
 		reset {
+			u-boot,dm-spl;
 			debounce-interval = <50>;
 			gpios = <&gpio0 RK_PB6 GPIO_ACTIVE_LOW>;
 			label = "reset";
