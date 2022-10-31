@@ -50,8 +50,7 @@ define U-Boot/fastrhino-r68s-rk3568
 endef
 
 UBOOT_TARGETS := \
-  fastrhino-r66s-rk3568 \
-  fastrhino-r68s-rk3568
+  fastrhino-r66s-rk3568
 
 UBOOT_CONFIGURE_VARS += USE_PRIVATE_LIBGCC=yes
 
