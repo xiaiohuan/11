@@ -24,7 +24,7 @@
 
 		recovery-key {
 			u-boot,dm-spl;
-			// u-boot needs this key to be happy
+			// u-boot needs this code to be happy
 			linux,code = <KEY_VOLUMEUP>;
 			label = "recovery";
 			press-threshold-microvolt = <9>;
