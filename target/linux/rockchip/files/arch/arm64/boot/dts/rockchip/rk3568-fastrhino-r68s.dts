@@ -73,6 +73,14 @@
 	};
 };
 
+&rtl8125_1 {
+	realtek,led-data = <0x4078>;
+};
+
+&rtl8125_2 {
+	realtek,led-data = <0x4078>;
+};
+
 &sdhci {
 	bus-width = <8>;
 	max-frequency = <200000000>;

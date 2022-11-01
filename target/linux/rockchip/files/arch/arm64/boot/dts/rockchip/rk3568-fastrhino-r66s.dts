@@ -13,6 +13,14 @@
 	};
 };
 
+&rtl8125_1 {
+	realtek,led-data = <0x78>;
+};
+
+&rtl8125_2 {
+	realtek,led-data = <0x78>;
+};
+
 &sdmmc0 {
 	max-frequency = <150000000>;
 	no-sdio;
