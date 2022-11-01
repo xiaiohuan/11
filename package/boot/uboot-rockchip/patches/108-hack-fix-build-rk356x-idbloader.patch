@@ -5,7 +5,7 @@
  			filename = "idbloader.img";
  			args = "-n", CONFIG_SYS_SOC, "-T", "rksd";
 -#ifdef CONFIG_TPL
-+#if defined(CONFIG_TPL) || defined(CONFIG_ROCKCHIP_RK3568)
++#if defined(CONFIG_TPL) || defined(CONFIG_ROCKCHIP_RK3566) || defined(CONFIG_ROCKCHIP_RK3568)
  			multiple-data-files;
  
  			u-boot-tpl {
